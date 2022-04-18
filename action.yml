@@ -19,16 +19,14 @@ runs:
         with:
           node-version: 14
 
-      - name: Install
-        shell: bash
-        run: npm i
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
 
       - name: Staging Deploy
         if: github.ref == 'refs/heads/main'
         shell: bash
         run: npx arc deploy --staging
         env:
-          CI: true
           AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
 
@@ -37,6 +35,5 @@ runs:
         shell: bash
         run: npx arc deploy --production
         env:
-          CI: true
           AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
           AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
