@@ -7,8 +7,6 @@ inputs:
     required: true
 runs:
   using: "composite"
-  if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
-  runs-on: ubuntu-latest
   steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.9.1
